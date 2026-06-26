@@ -9,12 +9,9 @@
     "start": "yarn schema && REACT_APP_MESSAGING_URL=ws://localhost:8088 react-scripts start",
     "schema": "mkdir -p build && npx ts-schema src/schema.ts build",
     "prodbuild": "cross-env GENERATE_SOURCEMAP=false react-scripts build && cp package.json build/",
-    "build": "rimraf build && yarn prodbuild && yarn schema && omg app build",
+    "build": "rimraf build && yarn prodbuild && yarn schema && phy app package --out build/bundle.gridapp",
     "eject": "react-scripts eject",
-    "pub": "omg app publish",
-    "settings": "omg app settings",
-    "upload-description": "omg app upload-description",
-    "connect": "omg dev ws"
+    "download-settings": "phy installation settings get"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -44,7 +41,6 @@
     "typescript": "~3.7.2"
   },
   "devDependencies": {
-    "@ombori/ga-cli": "^1.7.6",
     "@ombori/ts-schema": "^2.82.17",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
