@@ -1,6 +1,6 @@
 # template-mobile
 
-Starter template for Phystack mobile edge modules, scaffolded by `@phystack/cli`.
+Starter template for Phystack mobile edge modules, scaffolded by the `phy` CLI.
 
 ## Overview
 
@@ -61,10 +61,10 @@ Replace these with your own fields. Local development reads from `default.settin
 
 ## Usage
 
-This template is consumed by `@phystack/cli` to scaffold a new mobile edge module:
+This template is consumed by the `phy` CLI to scaffold a new mobile edge module:
 
 ```bash
-npx @phystack/cli create --template mobile my-app
+phy app create --template mobile my-app
 ```
 
 The CLI clones this repo, replaces placeholder values in `DESCRIPTION.md` and `package.json`, and sets up the new project directory. After scaffolding, install dependencies and start developing:
@@ -79,10 +79,13 @@ yarn start
 
 ```bash
 yarn build    # production build + schema generation + app packaging
-yarn pub      # publish to the Phystack app registry
+
+# Publishing (requires global phy CLI: npm i -g @phystack/cli@dev)
+phy app build create <app-id> --file build/bundle.gridapp
+phy app build publish <app-id> <build-id>
 ```
 
 ## Related Documentation
 
 - [DESCRIPTION.md](./DESCRIPTION.md) -- app store listing template
-- [Phystack CLI documentation](https://github.com/phystack/cli)
+- [phy CLI](https://www.npmjs.com/package/@phystack/cli) -- install globally: `npm i -g @phystack/cli@dev`
