@@ -1,88 +1,44 @@
 # template-mobile
 
-Starter template for Phystack mobile edge modules, scaffolded by `@phystack/cli`.
+Starter template for PhyStack **WEB** apps — mobile-PWA front-end bundles
+opened in a visitor's browser (the 2026-03 API renamed the legacy `mobile`
+type to `WEB`). Scaffolded by the PhyStack CLI (`phy app init --type web`)
+or usable directly.
 
-## Overview
+## Identical to the screen template, by design
 
-This template provides a minimal React application that runs as a `mobileapp` module on a Phystack edge device. It demonstrates settings integration, real-time messaging (publish/subscribe), and connection status handling. The scaffolded app is intended as a starting point -- replace the sample ping/pong logic with your own functionality.
+Web apps are architecturally the same as screen apps on today's platform: a
+front-end bundle connecting through `@phystack/hub-client`, with settings
+delivered via the app twin and the instance identified by `#instanceId` in
+the URL. This template is therefore a copy of
+[template-screen-react](https://github.com/phystack/template-screen-react)
+(Vite + React + hub-client), with exactly these differences:
 
-## Tech Stack
+| Difference | Value here |
+|---|---|
+| `application-type` in package.json | `web` (screen template: `screen`) |
+| Name / title / this README | mobile wording |
 
-| Layer | Technology |
-|-------|------------|
-| Language | TypeScript |
-| UI | React 16, styled-components |
-| Messaging | `@ombori/ga-messaging` (WebSocket) |
-| Settings | `@ombori/ga-settings` |
-| Build | react-scripts (CRA) |
-| Schema | `@ombori/ts-schema` |
+Nothing else differs — dependencies, scripts, schema pipeline, vite config
+and source layout are identical. If you find yourself changing one template,
+change both.
 
-## Prerequisites
-
-- Node.js 12+
-- Yarn
-
-## Getting Started
-
-```bash
-cd edge/template-mobile
-yarn install
-yarn bootstrap        # copies default settings into src/settings/
-yarn start            # starts dev server with local WebSocket messaging
-```
-
-The dev server connects to a local messaging endpoint at `ws://localhost:8088`.
-
-## Project Structure
-
-```
-src/
-  App.tsx              # Main component with messaging example
-  schema.ts            # Settings schema (generates JSON Schema at build)
-  index.tsx            # React entry point
-  index.css            # Global styles
-default.settings.json  # Default settings for local development
-meta/                  # App store screenshots
-public/                # Static assets and HTML shell
-DESCRIPTION.md         # App store listing (markdown template)
-package.json
-```
-
-## Settings Schema
-
-Settings are defined in `src/schema.ts` and compiled to JSON Schema during build. The default schema includes two example fields:
-
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `productName` | string | `"My Example Product"` | Display name |
-| `productPrice` | string | `"99 USD"` | Formatted price |
-
-Replace these with your own fields. Local development reads from `default.settings.json`.
-
-## Usage
-
-This template is consumed by `@phystack/cli` to scaffold a new mobile edge module:
+## Getting started
 
 ```bash
-npx @phystack/cli create --template mobile my-app
+# Scaffold via the PhyStack CLI
+phy app init my-web-app --type web
+
+# Or work directly from this template
+bun install
+bun run build
 ```
 
-The CLI clones this repo, replaces placeholder values in `DESCRIPTION.md` and `package.json`, and sets up the new project directory. After scaffolding, install dependencies and start developing:
+## Flow
 
 ```bash
-cd my-app
-yarn install
-yarn start
+bun run dev        # local development
+bun run build      # typecheck + vite build + schemas into build/
+phy app create my-web-app --type web    # register (once)
+bun run pub        # build + submit + publish (no container image for web)
 ```
-
-### Build and Publish
-
-```bash
-yarn build    # production build + schema generation + app packaging
-yarn pub      # publish to the Phystack app registry
-```
-
-## Related Documentation
-
-- [DESCRIPTION.md](./DESCRIPTION.md) -- app store listing template
-- [Phystack CLI documentation](https://github.com/phystack/cli)

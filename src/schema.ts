@@ -1,7 +1,7 @@
 /**
  * @title Example schema
  */
-export type Settings = {
+export interface Settings {
   /**
    * @title Product name
    * @default "My Example Product"
