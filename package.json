@@ -7,9 +7,9 @@
   "scripts": {
     "bootstrap": "mkdir -p src/settings && cp default.settings.json src/settings/index.json",
     "dev": "bun run start",
-    "start": "bun run schema && REACT_APP_MESSAGING_URL=ws://localhost:8088 react-scripts start",
+    "start": "bun run schema && cross-env NODE_OPTIONS=--openssl-legacy-provider REACT_APP_MESSAGING_URL=ws://localhost:8088 react-scripts start",
     "schema": "mkdir -p build && bunx ts-schema src/schema.ts build",
-    "prodbuild": "cross-env GENERATE_SOURCEMAP=false react-scripts build && cp package.json build/",
+    "prodbuild": "cross-env NODE_OPTIONS=--openssl-legacy-provider GENERATE_SOURCEMAP=false react-scripts build && cp package.json build/",
     "build": "rimraf build && bun run prodbuild && bun run schema",
     "pub": "bun run build && phy app build create $npm_package_name --dir . --publish"
   },
