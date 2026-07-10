@@ -38,8 +38,19 @@ bun run build
 ## Flow
 
 ```bash
-bun run dev        # local development
-bun run build      # typecheck + vite build + schemas into build/
-phy app create my-web-app --type web    # register (once)
-bun run pub        # build + submit + publish (no container image for web)
+# 1. Edit src/schema.ts (installation settings), src/analytics-schema.ts (events), src/App.tsx (UI)
+bun run dev                          # local development (simulator + vite)
+
+# 2. Local build: typecheck + vite build + schemas into build/
+bun run build
+
+# 3. Register the app in your tenant (once)
+phy app create my-web-app --type web
+
+# 4. Submit + publish the build (no container image for web apps)
+bun run pub
 ```
+
+`pub` runs `phy app build create $npm_package_name --dir . --publish` — the
+vite bundle and generated schemas are packaged and published as soon as the
+build processes.
