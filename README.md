@@ -17,6 +17,7 @@ the URL. This template is therefore a copy of
 | Difference | Value here |
 |---|---|
 | `application-type` in package.json | `web` (screen template: `screen`) |
+| PWA layer | `public/manifest.webmanifest`, theme-color + apple-touch-icon metas, installable icons — web apps live on visitors' phones |
 | Name / title / this README | mobile wording |
 
 Nothing else differs — dependencies, scripts, schema pipeline, vite config
