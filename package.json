@@ -10,7 +10,7 @@
   },
   "scripts": {
     "predev": "bun scripts/init-settings.js",
-    "dev": "phy-simulator run . --dev-command 'bun run start'",
+    "dev": "phy-simulator run . --type screen --dev-command 'bun run start'",
     "start": "bun run schema && vite",
     "schema": "mkdir -p build && bun scripts/build-schema.js && bun run analytics-schema",
     "analytics-schema": "bun scripts/build-analytics-schema.js",
